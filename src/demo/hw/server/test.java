@@ -6,14 +6,9 @@ import org.apache.cxf.frontend.ClientProxy;
 public class test {
 	public static void main(String[] args) {
 		HelloWorld2_Service service = new HelloWorld2_Service();
-		String sayHi = service.getHelloWorldImpl2Port().sayHi("222");
-		Client client = ClientProxy.getClient(sayHi);
-		boolean add = client.getOutInterceptors().add(new Myinterceptor("xzg", "123"));
-		if (add) {
-			System.out.println("success!");
-		} else {
-			System.out.println("filed!");
-		}
-		System.out.println("tonne");
+		HelloWorld2 helloWorldImpl2Port = service.getHelloWorldImpl2Port();
+		Client client = ClientProxy.getClient(helloWorldImpl2Port);
+		client.getOutInterceptors().add(new Myinterceptor("xzg", "1234"));
+		System.out.println(helloWorldImpl2Port.sayHi("tonne"));
 	}
 }
